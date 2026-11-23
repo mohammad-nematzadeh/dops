@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="dark">
+<head>
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo/favicon.svg"/>
+  <link rel="alternate icon" href="favicon.ico"/>
+
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ورود و عضویت — داپس (DOPS)</title>
+  <meta name="description" content="ورود به حساب کاربری و ثبت‌نام در پلتفرم پادکست‌های صوتی داپس."/>
+
+  <!-- Local Typography & Design System -->
+  <link rel="stylesheet" href="assets/css/vazirmatn.css"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <link rel="stylesheet" href="assets/css/animations.css"/>
+
+  <!-- Theme Bootstrapper -->
+  <script src="assets/js/dops-theme.js"></script>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex items-center justify-center p-4 selection:bg-primary selection:text-on-primary relative overflow-x-hidden">
+
+  <!-- Ambient Glow Spotlights -->
+  <div class="absolute top-10 right-1/4 w-96 h-96 bg-primary-container/10 rounded-full blur-[140px] pointer-events-none -z-10 animate-glow-slow"></div>
+  <div class="absolute bottom-10 left-10 w-96 h-96 bg-secondary/10 rounded-full blur-[120px] pointer-events-none -z-10 animate-glow-slow"></div>
+
+  <!-- Top Floating Controls (Back to Home & Theme Toggle) -->
+  <div class="fixed top-6 inset-x-6 flex items-center justify-between z-30">
+    <a href="index.html" class="btn-secondary text-[13px] py-2 px-4 flex items-center gap-2">
+      <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+      <span>بازگشت به صفحه اصلی</span>
+    </a>
+
+    <button type="button" class="theme-toggle-btn btn-icon" aria-label="تغییر حالت تیره و روشن">
+      <span class="material-symbols-outlined theme-toggle-icon text-[20px]">dark_mode</span>
+    </button>
+  </div>
+
+  <!-- Centered Auth Card -->
+  <div class="w-full max-w-md my-16">
+    <div class="p-8 sm:p-10 rounded-3xl bg-surface-container-low border border-outline-variant shadow-2xl relative">
+      
+      <!-- Brand Logo -->
+      <div class="flex flex-col items-center text-center mb-8">
+        <a href="index.html" class="inline-flex items-center gap-3 mb-3 group" aria-label="داپس صفحه اصلی">
+          <div class="relative w-11 h-11 shrink-0 flex items-center justify-center">
+            <img src="assets/images/logo/logo-icon.svg" alt="لوگوی رسمی داپس (DOPS)" width="44" height="44" class="w-full h-full object-contain" />
+          </div>
+          <span class="font-headline font-black text-3xl tracking-wider text-primary leading-none select-none">DOPS</span>
+        </a>
+        <h1 class="sr-only">ورود و عضویت در پلتفرم پادکست فارسی داپس</h1>
+        <p class="text-[13px] text-on-surface-variant">به جامعه شنوندگان و تولیدکنندگان خلاق بپیوندید</p>
+      </div>
+
+      <!-- Tab Switcher -->
+      <div class="flex items-center bg-surface-container p-1 rounded-2xl mb-6 border border-outline-variant" data-tabs-container>
+        <button type="button" class="tab-btn flex-1 text-center py-2.5 active bg-surface-container-high text-primary-container font-bold text-[13px] rounded-xl transition-all" data-tab-target="tab-login">
+          ورود به حساب
+        </button>
+        <button type="button" class="tab-btn flex-1 text-center py-2.5 text-outline font-bold text-[13px] rounded-xl transition-all" data-tab-target="tab-register">
+          ثبت‌نام جدید
+        </button>
+      </div>
+
+      <!-- ==================== TAB 1: LOGIN PANEL ==================== -->
+      <div data-tab-panel="tab-login">
+        <!-- Sub-method switcher (SMS OTP vs Password) -->
+        <div class="flex items-center p-1 bg-surface-container rounded-xl mb-5 border border-outline-variant text-[12px]">
+          <button type="button" class="auth-subtab-btn flex-1 py-1.5 rounded-lg active font-bold text-primary-container bg-surface-container-high transition-colors" data-auth-method="login-otp">
+            ورود با پیامک (سریع)
+          </button>
+          <button type="button" class="auth-subtab-btn flex-1 py-1.5 rounded-lg text-outline font-medium hover:text-on-surface transition-colors" data-auth-method="login-password">
+            ورود با رمز عبور
+          </button>
+        </div>
+
+        <!-- Method A: Login via SMS OTP -->
+        <form data-method-view="login-otp" onsubmit="event.preventDefault(); window.dopsToast('ورود با کد پیامکی با موفقیت انجام شد! خوش آمدید.', 'success'); setTimeout(function(){ window.location.href='listener-dashboard.html'; }, 1000);">
+          <!-- Step 1: Enter Mobile -->
+          <div class="otp-step-phone">
+            <div class="space-y-4 text-right">
+              <div>
+                <label class="block text-[12px] font-semibold text-on-surface mb-2">شماره تلفن همراه *</label>
+                <div class="dops-phone-group">
+                  <div class="dops-phone-prefix">
+                    <svg class="w-4 h-3 rounded-xs shrink-0" viewBox="0 0 640 480"><path fill="#239f40" d="M0 0h640v160H0z"/><path fill="#fff" d="M0 160h640v160H0z"/><path fill="#da0000" d="M0 320h640v160H0z"/></svg>
+                    <span>+۹۸</span>
+                  </div>
+                  <input type="tel" class="dops-phone-input" placeholder="۹۱۲۳۴۵۶۷۸۹" maxlength="11" required />
+                </div>
+                <span class="text-[11px] text-outline mt-1.5 block">کد تایید ۵ رقمی یکبارمصرف به این شماره پیامک خواهد شد</span>
+              </div>
+            </div>
+
+            <button type="button" class="btn-primary w-full justify-center py-3 text-[14px] shadow-glow auth-submit-btn flex items-center gap-2" data-send-otp>
+              <span>دریافت کد تایید پیامکی</span>
+              <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+            </button>
+          </div>
+
+          <!-- Step 2: Enter 5-digit OTP Code -->
+          <div class="otp-step-verify text-right" style="display:none;">
+            <p class="text-[12.5px] text-on-surface mb-3">
+              کد تایید پیامک‌شده به شماره <strong class="otp-target-phone font-mono text-primary"></strong> را وارد نمایید:
+            </p>
+
+            <div class="dops-otp-container my-4">
+              <input type="text" maxlength="1" class="dops-otp-input" inputmode="numeric" pattern="[0-9]*" required />
+              <input type="text" maxlength="1" class="dops-otp-input" inputmode="numeric" pattern="[0-9]*" required />
+              <input type="text" maxlength="1" class="dops-otp-input" inputmode="numeric" pattern="[0-9]*" required />
+              <input type="text" maxlength="1" class="dops-otp-input" inputmode="numeric" pattern="[0-9]*" required />
+              <input type="text" maxlength="1" class="dops-otp-input" inputmode="numeric" pattern="[0-9]*" required />
+            </div>
+
+            <div class="flex items-center justify-between text-[11.5px] text-outline mt-3">
+              <span class="flex items-center gap-1">
+                <span class="material-symbols-outlined text-[15px]">schedule</span>
+                <span>ارسال مجدد:</span>
+                <span class="otp-timer-count font-mono font-bold text-primary">۰۲:۰۰</span>
+              </span>
+              <button type="button" class="otp-resend-btn text-primary font-semibold hover:underline" style="display:none;" data-send-otp>ارسال مجدد کد</button>
+              <button type="button" class="text-secondary font-semibold hover:underline" data-edit-phone>ویرایش شماره موبایل</button>
+            </div>
+
+            <button type="submit" class="btn-primary w-full justify-center py-3 text-[14px] shadow-glow auth-submit-btn">
+              تایید و ورود به داپس
+            </button>
+          </div>
+        </form>
+
+        <!-- Method B: Login via Password -->
+        <form data-method-view="login-password" style="display:none;" onsubmit="event.preventDefault(); window.dopsToast('ورود با رمز عبور موفقیت‌آمیز بود! خوش آمدید.', 'success'); setTimeout(function(){ window.location.href='listener-dashboard.html'; }, 1000);">
+          <div class="space-y-4 text-right">
+            <div>
+              <label class="block text-[12px] font-semibold text-on-surface mb-1.5">ایمیل یا شماره تلفن همراه *</label>
+              <input type="text" class="dops-input" placeholder="09123456789 یا email@example.com" required/>
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <label class="block text-[12px] font-semibold text-on-surface">گذرواژه امنیتی *</label>
+                <a href="#" class="text-[11px] text-primary hover:underline" onclick="window.dopsToast('پیوند بازیابی رمز به ایمیل/شماره شما ارسال شد', 'success'); return false;">فراموشی رمز عبور؟</a>
+              </div>
+              <input type="password" class="dops-input" placeholder="••••••••" required/>
+            </div>
+
+            <div class="flex items-center gap-2 pt-1">
+              <input type="checkbox" id="login-remember-me" class="w-4 h-4 rounded accent-primary cursor-pointer" checked/>
+              <label for="login-remember-me" class="text-[12px] text-outline cursor-pointer select-none">مرا در این دستگاه به خاطر بسپار</label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary w-full justify-center py-3 text-[14px] shadow-glow auth-submit-btn">
+            ورود به پلتفرم داپس
+          </button>
+        </form>
+      </div>
+
+      <!-- ==================== TAB 2: REGISTER PANEL ==================== -->
+      <div data-tab-panel="tab-register" style="display:none;">
+        <!-- Sub-method switcher (SMS OTP vs Email) -->
+        <div class="flex items-center p-1 bg-surface-container rounded-xl mb-5 border border-outline-variant text-[12px]">
+          <button type="button" class="auth-subtab-btn flex-1 py-1.5 rounded-lg active font-bold text-primary-container bg-surface-container-high transition-colors" data-auth-method="register-otp">
+            ثبت‌نام سریع با پیامک
+          </button>
+          <button type="button" class="auth-subtab-btn flex-1 py-1.5 rounded-lg text-outline font-medium hover:text-on-surface transition-colors" data-auth-method="register-email">
+            ثبت‌نام با ایمیل و رمز
+          </button>
+        </div>
+
+        <!-- Method A: Register via SMS OTP -->
+        <form data-method-view="register-otp" onsubmit="event.preventDefault(); window.dopsToast('عضویت با شماره موبایل با موفقیت انجام شد!', 'success'); setTimeout(function(){ window.location.href='listener-dashboard.html'; }, 1000);">
+          <!-- Step 1: Info & Phone -->
+          <div class="otp-step-phone">
+            <div class="space-y-4 text-right">
+              <div>
+                <label class="block text-[12px] font-semibold text-on-surface mb-1.5">نام و نام خانوادگی *</label>
+                <input type="text" class="dops-input" placeholder="مثال: سهراب سپهری" required/>
+              </div>
+
+              <div>
+                <label class="block text-[12px] font-semibold text-on-surface mb-2">شماره تلفن همراه *</label>
+                <div class="dops-phone-group">
+                  <div class="dops-phone-prefix">
+                    <svg class="w-4 h-3 rounded-xs shrink-0" viewBox="0 0 640 480"><path fill="#239f40" d="M0 0h640v160H0z"/><path fill="#fff" d="M0 160h640v160H0z"/><path fill="#da0000" d="M0 320h640v160H0z"/></svg>
+                    <span>+۹۸</span>
+                  </div>
+                  <input type="tel" class="dops-phone-input" placeholder="۹۱۲۳۴۵۶۷۸۹" maxlength="11" required />
+                </div>
+                <span class="text-[11px] text-outline mt-1.5 block">کد احراز هویت پیامکی به این شماره ارسال خواهد شد</span>
+              </div>
+
+              <div class="flex items-center gap-2 pt-1">
+                <input type="checkbox" id="login-terms-agree-otp" class="w-4 h-4 rounded accent-primary cursor-pointer" required checked/>
+                <label for="login-terms-agree-otp" class="text-[11.5px] text-outline cursor-pointer select-none">
+                  <a href="#" class="text-primary hover:underline">شرایط استفاده و حریم خصوصی</a> داپس را می‌پذیرم
+                </label>
+              </div>
+            </div>
+
+            <button type="button" class="btn-primary w-full justify-center py-3 text-[14px] shadow-glow auth-submit-btn flex items-center gap-2" data-send-otp>
+              <span>ارسال کد احراز هویت پیامکی</span>
+              <span class="material-symbols-outlined text-[18px]">sms</span>
+            </button>
+          </div>
+
+          <!-- Step 2: Verify OTP for registration -->
+          <div class="otp-step-verify text-right" style="display:none;">
+            <p class="text-[12.5px] text-on-surface mb-3">
+              کد تایید ارسال‌شده به شماره <strong class="otp-target-phone font-mono text-primary"></strong> را وارد نمایید:
+            </p>
+
+            <div class="dops-otp-container my-4">
+              <input type="text" maxlength="1" class="dops-otp-input" inputmode="numeric" pattern="[0-9]*" required />
+              <input type="text" maxlength="1" class="dops-otp-input" inputmode="numeric" pattern="[0-9]*" required />
+              <input type="text" maxlength="1" class="dops-otp-input" inputmode="numeric" pattern="[0-9]*" required />
+              <input type="text" maxlength="1" class="dops-otp-input" inputmode="numeric" pattern="[0-9]*" required />
+              <input type="text" maxlength="1" class="dops-otp-input" inputmode="numeric" pattern="[0-9]*" required />
+            </div>
+
+            <div class="flex items-center justify-between text-[11.5px] text-outline mt-3">
+              <span class="flex items-center gap-1">
+                <span class="material-symbols-outlined text-[15px]">schedule</span>
+                <span>ارسال مجدد:</span>
+                <span class="otp-timer-count font-mono font-bold text-primary">۰۲:۰۰</span>
+              </span>
+              <button type="button" class="otp-resend-btn text-primary font-semibold hover:underline" style="display:none;" data-send-otp>ارسال مجدد کد</button>
+              <button type="button" class="text-secondary font-semibold hover:underline" data-edit-phone>ویرایش شماره</button>
+            </div>
+
+            <button type="submit" class="btn-primary w-full justify-center py-3 text-[14px] shadow-glow auth-submit-btn">
+              تکمیل ثبت‌نام و آغاز شنیدن
+            </button>
+          </div>
+        </form>
+
+        <!-- Method B: Register via Email & Password -->
+        <form data-method-view="register-email" style="display:none;" onsubmit="event.preventDefault(); window.dopsToast('عضویت با ایمیل با موفقیت ثبت شد!', 'success'); setTimeout(function(){ window.location.href='listener-dashboard.html'; }, 1000);">
+          <div class="space-y-4 text-right">
+            <div>
+              <label class="block text-[12px] font-semibold text-on-surface mb-1.5">نام و نام خانوادگی *</label>
+              <input type="text" class="dops-input" placeholder="مثال: سهراب سپهری" required/>
+            </div>
+
+            <div>
+              <label class="block text-[12px] font-semibold text-on-surface mb-1.5">آدرس رایانامه (ایمیل) *</label>
+              <input type="email" class="dops-input text-left font-mono text-[13px]" placeholder="name@example.com" dir="ltr" required/>
+            </div>
+
+            <div>
+              <label class="block text-[12px] font-semibold text-on-surface mb-1.5">رمز عبور دلخواه *</label>
+              <input type="password" class="dops-input" placeholder="حداقل ۸ کاراکتر" required/>
+            </div>
+
+            <div class="flex items-center gap-2 pt-1">
+              <input type="checkbox" id="login-terms-agree-email" class="w-4 h-4 rounded accent-primary cursor-pointer" required checked/>
+              <label for="login-terms-agree-email" class="text-[11.5px] text-outline cursor-pointer select-none">
+                <a href="#" class="text-primary hover:underline">شرایط استفاده و حریم خصوصی</a> را می‌پذیرم
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary w-full justify-center py-3 text-[14px] shadow-glow auth-submit-btn">
+            ثبت‌نام و آغاز شنیدن
+          </button>
+        </form>
+      </div>
+
+      <!-- Social Sign-in Divider (Fidibo Style) -->
+      <div class="relative my-6 text-center">
+        <div class="absolute inset-0 flex items-center">
+          <div class="w-full border-t border-outline-variant"></div>
+        </div>
+        <span class="relative px-3 bg-surface-container-low text-[11px] text-outline rounded-full font-medium">یا ورود سریع با</span>
+      </div>
+
+      <!-- Social Sign in -->
+      <div class="flex items-center justify-center gap-3">
+        <button type="button" class="btn-secondary flex-1 justify-center py-2.5 px-4 flex items-center gap-2 border border-outline-variant hover:border-outline transition-colors text-[13px]" onclick="window.dopsToast('در حال اتصال به حساب گوگل...');">
+          <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24">
+            <path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.7 14.8 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.7 2.9C6.5 7.4 9 5 12 5z"/>
+            <path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z"/>
+            <path fill="#FBBC05" d="M5.6 14.8c-.2-.7-.4-1.5-.4-2.3s.2-1.6.4-2.3L1.9 7.3C.7 9.7 0 12 0 14.8s.7 5.1 1.9 7.5l3.7-2.9c0-.2-.1-.4-.1-.6z"/>
+            <path fill="#34A853" d="M12 23.5c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2.4-6.4-5.2L1.9 16.5C3.7 20.2 7.5 23.5 12 23.5z"/>
+          </svg>
+          <span>گوگل</span>
+        </button>
+        <button type="button" class="btn-secondary flex-1 justify-center py-2.5 px-4 flex items-center gap-2 border border-outline-variant hover:border-outline transition-colors text-[13px]" onclick="window.dopsToast('در حال اتصال به تلگرام...');">
+          <span class="material-symbols-outlined text-[18px] text-secondary">send</span>
+          <span>تلگرام</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="assets/js/dops-ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="dark">
+<head>
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo/favicon.svg"/>
+  <link rel="alternate icon" href="favicon.ico"/>
+
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>میز کار شنونده — داپس (DOPS)</title>
+  <meta name="description" content="داشبورد شخصی شنوندگان داپس: پادکست‌های دنبال‌شده، تاریخچه شنیداری و پلی‌لیست‌های اختصاصی."/>
+
+  <!-- Local Typography & Design System -->
+  <link rel="stylesheet" href="assets/css/vazirmatn.css"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <link rel="stylesheet" href="assets/css/animations.css"/>
+
+  <!-- Theme Bootstrapper -->
+  <script src="assets/js/dops-theme.js"></script>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary selection:text-on-primary">
+
+  <!-- ========================================================================
+       1. DASHBOARD HEADER
+       ======================================================================== -->
+  <header class="fixed top-0 inset-x-0 z-50 glass-header">
+    <div class="w-full flex items-center justify-between dashboard-header-inner">
+      
+      <!-- Right: Logo & Workspace Title -->
+      <div class="flex items-center gap-2 sm:gap-4 shrink-0">
+        <a href="index.html" class="flex items-center gap-1.5 sm:gap-2 text-decoration-none group shrink-0" aria-label="داپس صفحه اصلی">
+          <div class="relative w-7 h-7 sm:w-8 sm:h-8 shrink-0 flex items-center justify-center">
+            <img src="assets/images/logo/logo-icon.svg" alt="لوگوی رسمی داپس (DOPS)" width="32" height="32" class="w-full h-full object-contain" />
+          </div>
+          <span class="font-headline font-black text-[18px] sm:text-[20px] tracking-wider text-primary leading-none select-none">DOPS</span>
+          <span class="dashboard-role-badge bg-surface-container-high text-primary border border-outline-variant">شنونده</span>
+        </a>
+      </div>
+
+      <!-- Center: Global Search -->
+      <div class="hidden md:flex items-center flex-1 max-w-md mx-4 bg-surface-container rounded-full px-4 py-1.5 border border-outline-variant">
+        <span class="material-symbols-outlined text-outline text-[18px] ml-2">search</span>
+        <input type="text" class="bg-transparent text-[13px] text-on-surface placeholder:text-outline outline-none w-full" placeholder="جستجو در قسمت‌ها، راوی، کانال..." name="search"/>
+        <span class="text-[10px] text-outline bg-surface-container-high px-1.5 py-0.5 rounded">⌘K</span>
+      </div>
+
+      <!-- Left: Theme & User Avatar -->
+      <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+        <button type="button" class="theme-toggle-btn btn-icon dashboard-header-action-theme" aria-label="تغییر حالت تیره و روشن">
+          <span class="material-symbols-outlined theme-toggle-icon text-[20px]">dark_mode</span>
+        </button>
+
+        <a href="index.html" class="btn-icon dashboard-header-action-home" title="مشاهده وبسایت" aria-label="مشاهده وبسایت">
+          <span class="material-symbols-outlined text-[20px]">home</span>
+        </a>
+
+        <!-- User Profile Pill -->
+        <button type="button" class="dashboard-profile-pill" data-modal-open="account-settings-modal" title="تنظیمات حساب کاربری">
+          <div class="relative w-8 h-8 rounded-full overflow-hidden ring-1 ring-primary-container shrink-0">
+            <img src="assets/images/avatars/avatar-alex.png" alt="محمد نعمت" class="w-full h-full object-cover"/>
+            <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-primary-container ring-1 ring-surface"></span>
+          </div>
+          <span class="text-[13px] font-bold text-on-surface hidden sm:inline">محمد نعمت</span>
+        </button>
+
+        <!-- Mobile Sidebar Toggle -->
+        <button type="button" class="lg:hidden btn-icon shrink-0" data-sidebar-toggle aria-label="منوی داشبورد">
+          <span class="material-symbols-outlined text-[22px]">menu</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Mobile Sidebar Backdrop -->
+  <div id="sidebar-backdrop" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[80] opacity-0 pointer-events-none transition-opacity duration-300"></div>
+
+  <!-- ========================================================================
+       2. DASHBOARD BODY (RTL: SIDEBAR ON RIGHT, CONTENT ON LEFT)
+       ======================================================================== -->
+  <div class="pt-20 flex min-h-screen">
+    
+    <!-- RIGHT SIDEBAR (LISTENER NAVIGATION) -->
+    <aside class="dashboard-sidebar z-[90]">
+      <div>
+        <div class="px-3 mb-4 flex items-center justify-between">
+          <span class="text-[11px] font-bold text-outline uppercase tracking-wider">میز کار شنونده</span>
+          <button type="button" class="lg:hidden btn-icon w-7 h-7 text-outline hover:text-on-surface" data-sidebar-toggle aria-label="بستن منو">
+            <span class="material-symbols-outlined text-[18px]">close</span>
+          </button>
+        </div>
+
+        <nav class="space-y-1">
+          <a href="listener-dashboard.html" class="sidebar-link active">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-[20px]">dashboard</span>
+              <span>نمای کلی داشبورد</span>
+            </div>
+            <span class="w-2 h-2 rounded-full bg-primary-container shadow-glow"></span>
+          </a>
+
+          <a href="podcast.html" class="sidebar-link">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-[20px]">explore</span>
+              <span>شنیدن پادکست‌ها</span>
+            </div>
+            <span class="text-[10px] px-1.5 py-0.5 rounded bg-primary-container/20 text-primary-container font-semibold">تازه</span>
+          </a>
+
+          <a href="#channels" class="sidebar-link">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-[20px]">subscriptions</span>
+              <span>کانال‌های دنبال‌شده</span>
+            </div>
+            <span class="text-[11px] px-2 py-0.5 rounded-full bg-surface-container-high text-outline">۲۴</span>
+          </a>
+
+          <a href="#saved" class="sidebar-link">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-[20px]">bookmark</span>
+              <span>قسمت‌های ذخیره‌شده</span>
+            </div>
+            <span class="text-[11px] px-2 py-0.5 rounded-full bg-surface-container-high text-primary font-semibold">۳۶</span>
+          </a>
+
+          <a href="#history" class="sidebar-link">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-[20px]">history</span>
+              <span>تاریخچه شنیدن</span>
+            </div>
+          </a>
+
+          <a href="#playlists" class="sidebar-link">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-[20px]">queue_music</span>
+              <span>پلی‌لیست‌های من</span>
+            </div>
+            <span class="text-[11px] px-2 py-0.5 rounded-full bg-surface-container-high text-outline">۷</span>
+          </a>
+        </nav>
+
+        <div class="my-4 mx-3 h-px bg-outline-variant"></div>
+
+        <div class="px-3 mb-2">
+          <span class="text-[11px] font-bold text-outline">سفارشی‌سازی و حساب</span>
+        </div>
+
+        <nav class="space-y-1">
+          <!-- Mobile Drawer Access: Home & Theme Toggle (Transferred from header) -->
+          <a href="index.html" class="sidebar-link lg:hidden">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-[20px]">home</span>
+              <span>صفحه اصلی وبسایت</span>
+            </div>
+            <span class="material-symbols-outlined text-[16px] text-outline">arrow_back</span>
+          </a>
+
+          <button type="button" class="theme-toggle-btn sidebar-link w-full text-right cursor-pointer lg:hidden" aria-label="تغییر حالت تیره و روشن">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined theme-toggle-icon text-[20px]">dark_mode</span>
+              <span>تغییر پوسته (شب / روز)</span>
+            </div>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-surface-container-high text-primary font-medium">پوسته</span>
+          </button>
+
+          <a href="#" class="sidebar-link" data-modal-open="equalizer-modal">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-[20px] text-primary">graphic_eq</span>
+              <span>تنظیمات اکولایزر صوتی</span>
+            </div>
+            <span class="text-[10px] px-1.5 py-0.5 rounded bg-primary-container/20 text-primary-container font-semibold font-mono">DSP</span>
+          </a>
+
+          <a href="#" class="sidebar-link" data-modal-open="account-settings-modal">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-[20px]">settings</span>
+              <span>تنظیمات حساب</span>
+            </div>
+          </a>
+
+          <a href="index.html" class="sidebar-link text-error hover:bg-surface-container-high" onclick="window.dopsToast('با موفقیت خارج شدید');">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-[20px]">logout</span>
+              <span>خروج از حساب کاربری</span>
+            </div>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Offline Storage Pod -->
+      <div class="p-4 rounded-2xl bg-surface-container-low border border-outline-variant shadow-sm mt-6">
+        <div class="flex items-center justify-between text-[12px] mb-2">
+          <span class="font-bold text-on-surface">حافظه بارگیری آفلاین</span>
+          <span class="text-primary-container font-mono font-semibold">۳.۲ / ۸ GB</span>
+        </div>
+        <div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden mb-2">
+          <div class="h-full bg-primary-container rounded-full w-[40%] shadow-glow"></div>
+        </div>
+        <span class="text-[11px] text-outline block">۱۴ اپیزود بدون اینترنت در دسترس است</span>
+      </div>
+    </aside>
+
+    <!-- LEFT MAIN CONTENT STREAM -->
+    <main class="flex-1 p-4 lg:p-8 max-w-full overflow-hidden pb-48 lg:pb-56">
+      
+      <!-- 1. Header Greeting Strip -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-2xl bg-surface-container-low border border-outline-variant shadow-sm mb-8">
+        <div>
+          <h1 class="font-headline-md font-bold text-on-surface text-[22px]">سلام، محمد نعمت 👋</h1>
+          <p class="text-[13px] text-on-surface-variant mt-1">به داپس — پلتفرم هوشمند پادکست فارسی خوش آمدید؛ ادامه پادکست‌های خود را پیگیری کنید.</p>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="flex items-center bg-surface-container rounded-full px-3 py-1.5 border border-outline-variant">
+            <span class="material-symbols-outlined text-outline text-[18px] ml-1">search</span>
+            <input type="text" class="bg-transparent text-[12px] text-on-surface placeholder:text-outline outline-none w-36 sm:w-48" placeholder="جستجو در آرشیو من..."/>
+          </div>
+
+          <button type="button" class="btn-icon relative" onclick="window.dopsToast('۳ رویداد جدید ثبت شده است')">
+            <span class="material-symbols-outlined text-[20px]">notifications</span>
+            <span class="absolute top-2 left-2 w-2 h-2 rounded-full bg-primary-container shadow-glow"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 2. Currently Listening Hero Card -->
+      <section class="relative rounded-3xl bg-surface-container-low border border-outline-variant p-6 lg:p-8 shadow-xl mb-8 overflow-hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+          
+          <!-- Metadata & Play CTA (8 cols) -->
+          <div class="lg:col-span-8 flex flex-col items-start text-right">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+              <span class="text-[12px] font-bold text-primary-container">در حال گوش دادن • پادکست دنیای فردا</span>
+              <span class="text-[11px] text-outline">• فصل چهارم</span>
+            </div>
+
+            <h2 class="font-headline-lg font-bold text-on-surface text-[20px] sm:text-[24px] mb-2">
+              آینده عامل‌های هوشمند؛ آیا هوش مصنوعی جای ما را می‌گیرد؟
+            </h2>
+
+            <p class="text-[13px] text-on-surface-variant leading-relaxed mb-4 max-w-2xl">
+              بررسی فنی نسل نوین مدل‌های چندوجهی استدلالی و بازتعریف کارکردهای شناختی انسان معاصر با حضور دکتر کاوه رادمنش.
+            </p>
+
+            <!-- Progress Bar -->
+            <div class="w-full max-w-xl mb-4">
+              <div class="flex items-center justify-between text-[12px] font-mono text-outline mb-1.5">
+                <span class="text-primary-container font-semibold">۶۸٪ شنیده شده • ۲۸:۴۵ از ۴۲:۱۵</span>
+                <span>باقیمانده: ۱۳:۳۰</span>
+              </div>
+              <div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-secondary to-primary-container rounded-full w-[68%] shadow-glow"></div>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-3">
+              <button type="button" class="btn-primary text-[14px] py-2.5 px-6 play-episode-btn"
+                      data-podcast-play="true"
+                      data-track-title="آینده عامل‌های هوشمند؛ آیا هوش مصنوعی جای ما را می‌گیرد؟"
+                      data-track-podcast="دنیای فردا • قسمت ۸۴"
+                      data-track-artwork="assets/images/podcasts/donye-farda.png">
+                <span class="material-symbols-outlined text-[20px]">play_arrow</span>
+                <span>ادامه پخش اپیزود</span>
+              </button>
+
+              <button type="button" class="btn-secondary text-[13px] py-2 px-3.5 flex items-center gap-2" data-modal-open="equalizer-modal" aria-label="اکولایزر صوتی">
+                <span class="material-symbols-outlined text-[18px] text-primary">graphic_eq</span>
+                <span>اکولایزر صوتی</span>
+              </button>
+
+              <button type="button" class="btn-secondary text-[13px] py-2 px-4 btn-bookmark active" data-bookmark-btn>
+                <span class="material-symbols-outlined text-[16px] fill-current text-primary-container">bookmark</span>
+                <span>نشان‌شده</span>
+              </button>
+
+              <button type="button" class="btn-icon" data-share-copy aria-label="اشتراک‌گذاری">
+                <span class="material-symbols-outlined text-[18px]">share</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Cover Art & Host Portrait (4 cols) -->
+          <div class="lg:col-span-4 flex items-center justify-center gap-4">
+            <div class="relative w-36 sm:w-44 aspect-square rounded-2xl overflow-hidden shadow-2xl border border-primary-container/40 ring-2 ring-primary-container/20">
+              <img src="assets/images/podcasts/donye-farda.png" alt="کاور دنیای فردا" class="w-full h-full object-cover"/>
+              <div class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-surface/90 text-[10px] text-primary-container font-bold">
+                قسمت ۸۴
+              </div>
+            </div>
+
+            <div class="relative w-28 sm:w-32 aspect-square rounded-2xl overflow-hidden shadow-xl border border-outline-variant hidden sm:block">
+              <img src="assets/images/avatars/host-ali-rezaei.png" alt="علی رضایی" class="w-full h-full object-cover"/>
+              <div class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-surface/90 text-[9px] text-secondary font-semibold">
+                استودیویی 96k
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 3. FOUR LISTENING STAT CARDS -->
+      <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        
+        <div class="p-5 rounded-2xl bg-surface-container-low border border-outline-variant flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center text-primary-container shrink-0">
+            <span class="material-symbols-outlined text-[24px]">headphones</span>
+          </div>
+          <div>
+            <div class="font-headline-sm font-extrabold text-on-surface text-[20px]">۱,۲۴۰ دقیقه</div>
+            <div class="text-[11px] text-primary-container font-semibold mt-0.5">↑ ۱۸٪ بیشتر از هفته گذشته</div>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-surface-container-low border border-outline-variant flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center text-secondary shrink-0">
+            <span class="material-symbols-outlined text-[24px]">subscriptions</span>
+          </div>
+          <div>
+            <div class="font-headline-sm font-extrabold text-on-surface text-[20px]">۲۴ پادکست</div>
+            <div class="text-[11px] text-outline mt-0.5">۳ کانال با اپیزود جدید</div>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-surface-container-low border border-outline-variant flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+            <span class="material-symbols-outlined text-[24px]">bookmark</span>
+          </div>
+          <div>
+            <div class="font-headline-sm font-extrabold text-on-surface text-[20px]">۳۶ اپیزود</div>
+            <div class="text-[11px] text-outline mt-0.5">تقریباً ۱۸ ساعت محتوا</div>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-surface-container-low border border-outline-variant flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center text-secondary shrink-0">
+            <span class="material-symbols-outlined text-[24px]">queue_music</span>
+          </div>
+          <div>
+            <div class="font-headline-sm font-extrabold text-on-surface text-[20px]">۷ فهرست</div>
+            <div class="text-[11px] text-outline mt-0.5">آخرین ویرایش: دیروز</div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- 4. RECENTLY PLAYED TILES -->
+      <section id="history" class="mb-8">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-headline-sm font-bold text-on-surface text-[17px]">اخیراً پخش شده</h3>
+          <a href="#" class="text-[13px] text-primary-container font-semibold hover:underline" onclick="window.dopsToast('تاریخچه کامل'); return false;">مشاهده تاریخچه کامل ←</a>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          
+          <div class="relative rounded-2xl overflow-hidden aspect-video bg-surface-container-low border border-outline-variant group cursor-pointer play-episode-btn"
+               data-podcast-play="true"
+               data-track-title="پادکست نقطه صفر: معماری ذهن"
+               data-track-podcast="نقطه صفر • قسمت ۴۲"
+               data-track-artwork="assets/images/podcasts/cover-noghteh-sefr.png">
+            <img src="assets/images/podcasts/cover-noghteh-sefr.png" alt="نقطه صفر" class="w-full h-full object-cover group-hover:scale-105 transition-transform"/>
+            <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <span class="play-circle-btn w-10 h-10"><span class="material-symbols-outlined text-[22px]">play_arrow</span></span>
+            </div>
+            <span class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/80 text-[11px] font-mono text-white">۲۸:۰۰</span>
+          </div>
+
+          <div class="relative rounded-2xl overflow-hidden aspect-video bg-surface-container-low border border-outline-variant group cursor-pointer play-episode-btn"
+               data-podcast-play="true"
+               data-track-title="کافه تکنولوژی: گجت‌های جدید"
+               data-track-podcast="کافه تکنولوژی • قسمت ۳۰"
+               data-track-artwork="assets/images/podcasts/cover-cafe-technology.png">
+            <img src="assets/images/podcasts/cover-cafe-technology.png" alt="کافه تکنولوژی" class="w-full h-full object-cover group-hover:scale-105 transition-transform"/>
+            <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <span class="play-circle-btn w-10 h-10"><span class="material-symbols-outlined text-[22px]">play_arrow</span></span>
+            </div>
+            <span class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/80 text-[11px] font-mono text-white">۵۱:۱۰</span>
+          </div>
+
+          <div class="relative rounded-2xl overflow-hidden aspect-video bg-surface-container-low border border-outline-variant group cursor-pointer play-episode-btn"
+               data-podcast-play="true"
+               data-track-title="مسیر رشد: استارتاپ‌های نوین"
+               data-track-podcast="مسیر رشد • قسمت ۲۴"
+               data-track-artwork="assets/images/podcasts/cover-masire-roshd.png">
+            <img src="assets/images/podcasts/cover-masire-roshd.png" alt="مسیر رشد" class="w-full h-full object-cover group-hover:scale-105 transition-transform"/>
+            <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <span class="play-circle-btn w-10 h-10"><span class="material-symbols-outlined text-[22px]">play_arrow</span></span>
+            </div>
+            <span class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/80 text-[11px] font-mono text-white">۳۶:۲۰</span>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 5. CHANNELS & SAVED EPISODES SPLIT -->
+      <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+        
+        <!-- Right Column: Followed Channels (6 cols) -->
+        <div id="channels" class="lg:col-span-6 space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="font-headline-sm font-bold text-on-surface text-[17px]">کانال‌های برگزیده من (۲۴ کانال)</h3>
+          </div>
+
+          <div class="space-y-3">
+            <div class="p-3.5 rounded-xl bg-surface-container-low border border-outline-variant flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <img src="assets/images/podcasts/donye-farda.png" alt="دنیای فردا" class="w-11 h-11 rounded-lg object-cover"/>
+                <div>
+                  <h4 class="text-[14px] font-bold text-on-surface">دنیای فردا</h4>
+                  <div class="text-[11px] text-outline">هفتگی • ۸۴ اپیزود</div>
+                </div>
+              </div>
+              <button type="button" class="btn-secondary text-[12px] py-1.5 px-3 btn-follow followed" data-follow-btn>
+                <span>دنبال شده ✓</span>
+              </button>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-surface-container-low border border-outline-variant flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <img src="assets/images/podcasts/cover-noghteh-sefr.png" alt="نقطه صفر" class="w-11 h-11 rounded-lg object-cover"/>
+                <div>
+                  <h4 class="text-[14px] font-bold text-on-surface">نقطه صفر</h4>
+                  <div class="text-[11px] text-outline">دوهفتگی • ۴۹ اپیزود</div>
+                </div>
+              </div>
+              <button type="button" class="btn-secondary text-[12px] py-1.5 px-3 btn-follow followed" data-follow-btn>
+                <span>دنبال شده ✓</span>
+              </button>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-surface-container-low border border-outline-variant flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <img src="assets/images/podcasts/cover-cafe-technology.png" alt="کافه تکنولوژی" class="w-11 h-11 rounded-lg object-cover"/>
+                <div>
+                  <h4 class="text-[14px] font-bold text-on-surface">کافه تکنولوژی</h4>
+                  <div class="text-[11px] text-outline">هفتگی • ۱۰۲ اپیزود</div>
+                </div>
+              </div>
+              <button type="button" class="btn-secondary text-[12px] py-1.5 px-3 btn-follow followed" data-follow-btn>
+                <span>دنبال شده ✓</span>
+              </button>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-surface-container-low border border-outline-variant flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <img src="assets/images/podcasts/cover-masire-roshd.png" alt="مسیر رشد" class="w-11 h-11 rounded-lg object-cover"/>
+                <div>
+                  <h4 class="text-[14px] font-bold text-on-surface">مسیر رشد</h4>
+                  <div class="text-[11px] text-outline">ماهانه • ۳۵ اپیزود</div>
+                </div>
+              </div>
+              <button type="button" class="btn-secondary text-[12px] py-1.5 px-3 btn-follow followed" data-follow-btn>
+                <span>دنبال شده ✓</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Left Column: Saved for Later (6 cols) -->
+        <div id="saved" class="lg:col-span-6 space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="font-headline-sm font-bold text-on-surface text-[17px]">قسمت‌های ذخیره‌شده برای بعد (۳۶ قسمت)</h3>
+            <span class="text-[12px] text-outline">مدیریت همه</span>
+          </div>
+
+          <div class="space-y-3">
+            <div class="p-3 rounded-xl bg-surface-container-low border border-outline-variant flex items-center justify-between">
+              <div class="flex items-center gap-3 min-w-0">
+                <button type="button" class="play-circle-btn w-9 h-9 shrink-0 play-episode-btn"
+                        data-podcast-play="true"
+                        data-track-title="تحلیل فلسفی هوش مصنوعی و آگاهی دیجیتال"
+                        data-track-podcast="دنیای فردا • قسمت ۴۵"
+                        data-track-artwork="assets/images/podcasts/donye-farda.png">
+                  <span class="material-symbols-outlined text-[20px]">play_arrow</span>
+                </button>
+                <div class="truncate">
+                  <h4 class="text-[13px] font-bold text-on-surface truncate">تحلیل فلسفی هوش مصنوعی و آگاهی دیجیتال</h4>
+                  <div class="text-[11px] text-outline mt-0.5">دنیای فردا • ۴۵ دقیقه • ذخیره شده ۲ روز قبل</div>
+                </div>
+              </div>
+              <div class="flex items-center gap-1 shrink-0">
+                <button type="button" class="btn-icon w-8 h-8" onclick="window.dopsToast('دانلود آفلاین');"><span class="material-symbols-outlined text-[16px]">download</span></button>
+                <button type="button" class="btn-icon w-8 h-8" onclick="window.dopsToast('از ذخیره‌شده‌ها حذف شد');"><span class="material-symbols-outlined text-[16px]">close</span></button>
+              </div>
+            </div>
+
+            <div class="p-3 rounded-xl bg-surface-container-low border border-outline-variant flex items-center justify-between">
+              <div class="flex items-center gap-3 min-w-0">
+                <button type="button" class="play-circle-btn w-9 h-9 shrink-0 play-episode-btn"
+                        data-podcast-play="true"
+                        data-track-title="چگونه در دنیای پرهیاهو عمیق تمرکز کنیم؟"
+                        data-track-podcast="مسیر رشد • قسمت ۳۱"
+                        data-track-artwork="assets/images/podcasts/cover-masire-roshd.png">
+                  <span class="material-symbols-outlined text-[20px]">play_arrow</span>
+                </button>
+                <div class="truncate">
+                  <h4 class="text-[13px] font-bold text-on-surface truncate">چگونه در دنیای پرهیاهو عمیق تمرکز کنیم؟</h4>
+                  <div class="text-[11px] text-outline mt-0.5">مسیر رشد • ۳۱ دقیقه • ذخیره شده این هفته</div>
+                </div>
+              </div>
+              <div class="flex items-center gap-1 shrink-0">
+                <button type="button" class="btn-icon w-8 h-8 text-primary"><span class="material-symbols-outlined text-[16px]">check_circle</span></button>
+                <button type="button" class="btn-icon w-8 h-8" onclick="window.dopsToast('از ذخیره‌شده‌ها حذف شد');"><span class="material-symbols-outlined text-[16px]">close</span></button>
+              </div>
+            </div>
+
+            <div class="p-3 rounded-xl bg-surface-container-low border border-outline-variant flex items-center justify-between">
+              <div class="flex items-center gap-3 min-w-0">
+                <button type="button" class="play-circle-btn w-9 h-9 shrink-0 play-episode-btn"
+                        data-podcast-play="true"
+                        data-track-title="موتورهای بازی‌سازی جدید و متاورس واقعی"
+                        data-track-podcast="کافه تکنولوژی • قسمت ۵۸"
+                        data-track-artwork="assets/images/podcasts/cover-cafe-technology.png">
+                  <span class="material-symbols-outlined text-[20px]">play_arrow</span>
+                </button>
+                <div class="truncate">
+                  <h4 class="text-[13px] font-bold text-on-surface truncate">موتورهای بازی‌سازی جدید و متاورس واقعی</h4>
+                  <div class="text-[11px] text-outline mt-0.5">کافه تکنولوژی • ۵۸ دقیقه • ذخیره شده هفته گذشته</div>
+                </div>
+              </div>
+              <div class="flex items-center gap-1 shrink-0">
+                <button type="button" class="btn-icon w-8 h-8" onclick="window.dopsToast('دانلود آفلاین');"><span class="material-symbols-outlined text-[16px]">download</span></button>
+                <button type="button" class="btn-icon w-8 h-8" onclick="window.dopsToast('از ذخیره‌شده‌ها حذف شد');"><span class="material-symbols-outlined text-[16px]">close</span></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-[12px] text-outline pt-2 flex items-center justify-between">
+            <span>پخش خودکار بعد از اتمام هر اپیزود فعال است.</span>
+            <button type="button" class="text-primary hover:underline" onclick="window.dopsToast('موارد تمام‌شده پاکسازی شدند', 'success')">پاکسازی موارد تمام‌شده</button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- 6. PERSONAL PLAYLISTS -->
+      <section id="playlists" class="mb-8">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-headline-sm font-bold text-on-surface text-[17px]">پلی‌لیست‌های شخصی من</h3>
+          <button type="button" class="btn-secondary text-[12px] py-1.5 px-3 flex items-center gap-1" onclick="window.dopsToast('پلی‌لیست جدید ساخته شد', 'success')">
+            <span class="material-symbols-outlined text-[16px]">add</span>
+            <span>ایجاد پلی‌لیست تازه</span>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          
+          <div class="p-5 rounded-2xl bg-surface-container-low border border-outline-variant hover:border-primary-container transition-colors group">
+            <div class="flex items-center justify-between mb-3">
+              <div class="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center text-primary">
+                <span class="material-symbols-outlined text-[22px]">directions_subway</span>
+              </div>
+              <span class="text-[11px] text-outline">۲۴ اپیزود</span>
+            </div>
+            <h4 class="font-headline-sm font-bold text-on-surface text-[15px] mb-1">مسیر رفت‌وآمد روزانه</h4>
+            <p class="text-[12px] text-on-surface-variant mb-4">اپیزودهای فشرده زیر ۳۰ دقیقه برای ترافیک و مترو</p>
+            <div class="flex items-center justify-between pt-3 border-t border-outline-variant text-[11px] text-outline">
+              <span>مجموعاً ۱۲ ساعت</span>
+              <button type="button" class="btn-icon w-8 h-8 play-episode-btn" data-podcast-play="true"><span class="material-symbols-outlined text-[16px]">play_arrow</span></button>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-surface-container-low border border-outline-variant hover:border-primary-container transition-colors group">
+            <div class="flex items-center justify-between mb-3">
+              <div class="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center text-secondary">
+                <span class="material-symbols-outlined text-[22px]">hub</span>
+              </div>
+              <span class="text-[11px] text-outline">۱۸ اپیزود</span>
+            </div>
+            <h4 class="font-headline-sm font-bold text-on-surface text-[15px] mb-1">یادگیری عمیق و هوش</h4>
+            <p class="text-[12px] text-on-surface-variant mb-4">گفتگوهای عمیق پیرامون معماری شبکه و الگوریتم‌ها</p>
+            <div class="flex items-center justify-between pt-3 border-t border-outline-variant text-[11px] text-outline">
+              <span>مجموعاً ۱۶ ساعت</span>
+              <button type="button" class="btn-icon w-8 h-8 play-episode-btn" data-podcast-play="true"><span class="material-symbols-outlined text-[16px]">play_arrow</span></button>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-surface-container-low border border-outline-variant hover:border-primary-container transition-colors group">
+            <div class="flex items-center justify-between mb-3">
+              <div class="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center text-primary">
+                <span class="material-symbols-outlined text-[22px]">self_improvement</span>
+              </div>
+              <span class="text-[11px] text-outline">۱۲ اپیزود</span>
+            </div>
+            <h4 class="font-headline-sm font-bold text-on-surface text-[15px] mb-1">آرامش و تأمل آخر هفته</h4>
+            <p class="text-[12px] text-on-surface-variant mb-4">مباحث فلسفی، تاریخ هنر و روایت‌های آرامش‌بخش</p>
+            <div class="flex items-center justify-between pt-3 border-t border-outline-variant text-[11px] text-outline">
+              <span>مجموعاً ۹ ساعت</span>
+              <button type="button" class="btn-icon w-8 h-8 play-episode-btn" data-podcast-play="true"><span class="material-symbols-outlined text-[16px]">play_arrow</span></button>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-surface-container-low border border-outline-variant hover:border-primary-container transition-colors group">
+            <div class="flex items-center justify-between mb-3">
+              <div class="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center text-secondary">
+                <span class="material-symbols-outlined text-[22px]">code</span>
+              </div>
+              <span class="text-[11px] text-outline">۹ اپیزود</span>
+            </div>
+            <h4 class="font-headline-sm font-bold text-on-surface text-[15px] mb-1">تمرکز کاری و کدنویسی</h4>
+            <p class="text-[12px] text-on-surface-variant mb-4">پادکست‌های تخصصی بدون حاشیه برای زمان برنامه‌نویسی</p>
+            <div class="flex items-center justify-between pt-3 border-t border-outline-variant text-[11px] text-outline">
+              <span>مجموعاً ۷ ساعت</span>
+              <button type="button" class="btn-icon w-8 h-8 play-episode-btn" data-podcast-play="true"><span class="material-symbols-outlined text-[16px]">play_arrow</span></button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 7. SMART RECOMMENDATIONS & RECENT ACTIVITY -->
+      <section class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Smart Algorithmic Recommendations (7 cols) -->
+        <div class="lg:col-span-7 space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="font-headline-sm font-bold text-on-surface text-[17px]">پیشنهادهای هوشمند الگوریتم</h3>
+            <span class="text-[11px] px-2 py-0.5 rounded-full bg-surface-container-high text-primary font-semibold">بر اساس سلیقه شما</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="p-4 rounded-2xl bg-surface-container-low border border-outline-variant block group">
+              <div class="relative w-full aspect-video rounded-xl overflow-hidden mb-3 bg-surface-container">
+                <img src="assets/images/podcasts/cover-farasooye-edrak.png" alt="فراسوی ادراک دیجیتال" class="w-full h-full object-cover group-hover:scale-105 transition-transform"/>
+                <span class="absolute top-2 right-2 px-2 py-0.5 rounded bg-black/80 text-primary text-[10px] font-bold">۹۸٪ تطابق</span>
+              </div>
+              <h4 class="font-headline-sm font-bold text-on-surface text-[14px]">فراسوی ادراک دیجیتال</h4>
+              <p class="text-[12px] text-on-surface-variant mt-1 line-clamp-1">بررسی مرز میان هوشیاری سایبری و منطق زیستی</p>
+              <div class="flex items-center justify-between pt-3 mt-3 border-t border-outline-variant text-[12px]">
+                <button type="button" class="text-primary font-semibold hover:underline play-episode-btn" data-podcast-play="true">شنیدن قسمت اول</button>
+                <span class="text-outline font-mono">۳۲ دقیقه</span>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-surface-container-low border border-outline-variant block group">
+              <div class="relative w-full aspect-video rounded-xl overflow-hidden mb-3 bg-surface-container">
+                <img src="assets/images/podcasts/cover-shahrvandan-farda.png" alt="شهروندان فردا" class="w-full h-full object-cover group-hover:scale-105 transition-transform"/>
+                <span class="absolute top-2 right-2 px-2 py-0.5 rounded bg-black/80 text-primary text-[10px] font-bold">۹۴٪ تطابق</span>
+              </div>
+              <h4 class="font-headline-sm font-bold text-on-surface text-[14px]">شهروندان فردا</h4>
+              <p class="text-[12px] text-on-surface-variant mt-1 line-clamp-1">سبک زیست شهری در عصر انقلاب خودمختاری</p>
+              <div class="flex items-center justify-between pt-3 mt-3 border-t border-outline-variant text-[12px]">
+                <button type="button" class="text-primary font-semibold hover:underline play-episode-btn" data-podcast-play="true">شنیدن قسمت اول</button>
+                <span class="text-outline font-mono">۳۸ دقیقه</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Activity Timeline (5 cols) -->
+        <div class="lg:col-span-5 space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="font-headline-sm font-bold text-on-surface text-[17px]">رویدادهای اخیر شنونده</h3>
+            <span class="material-symbols-outlined text-outline text-[18px]">history</span>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-surface-container-low border border-outline-variant space-y-4">
+            <div class="flex items-start gap-3">
+              <span class="w-2 h-2 rounded-full bg-primary-container mt-1.5 shrink-0 shadow-glow"></span>
+              <div>
+                <div class="text-[13px] font-bold text-on-surface">دنبال کردن کانال «دنیای فردا»</div>
+                <div class="text-[11px] text-outline mt-0.5">۳۰ دقیقه پیش • خودکار همگام شد</div>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <span class="w-2 h-2 rounded-full bg-secondary mt-1.5 shrink-0"></span>
+              <div>
+                <div class="text-[13px] font-bold text-on-surface">ذخیره اپیزود ۸۴ در پلی‌لیست «یادگیری عمیق»</div>
+                <div class="text-[11px] text-outline mt-0.5">امروز، ساعت ۰۸:۲۰</div>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <span class="w-2 h-2 rounded-full bg-outline-variant mt-1.5 shrink-0"></span>
+              <div>
+                <div class="text-[13px] font-bold text-on-surface">اتمام پخش قسمت ۱۲ از پادکست نقطه صفر</div>
+                <div class="text-[11px] text-outline mt-0.5">دیروز، ساعت ۲۲:۱۵</div>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <span class="w-2 h-2 rounded-full bg-primary mt-1.5 shrink-0"></span>
+              <div>
+                <div class="text-[13px] font-bold text-on-surface">دانلود آفلاین اپیزود ۵۶ (کیفیت استودیویی)</div>
+                <div class="text-[11px] text-outline mt-0.5">۲ روز پیش • روی دستگاه تبلت</div>
+              </div>
+            </div>
+
+            <div class="pt-3 border-t border-outline-variant flex items-center justify-between text-[11px] text-outline">
+              <span>همگام‌سازی ابری: فعال (DOPS Cloud)</span>
+              <span class="w-2 h-2 rounded-full bg-primary-container"></span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+        <!-- Bottom Safety Spacer for Audio Player Dock -->
+        <div class="h-20 sm:h-24 w-full pointer-events-none" aria-hidden="true"></div>
+    </main>
+
+  </div>
+
+  <!-- ========================================================================
+       3. UNIVERSAL PERSISTENT BOTTOM AUDIO PLAYER DOCK
+       ======================================================================== -->
+  
+  <!-- ========================================================================
+       MODAL: AUDIO EQUALIZER
+       ======================================================================== -->
+  <div id="equalizer-modal" class="dops-modal-backdrop">
+    <div class="dops-modal-content dops-modal-lg">
+      <!-- Modal Header -->
+      <div class="dops-modal-header">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-primary-container/10 flex items-center justify-center text-primary-container shrink-0">
+            <span class="material-symbols-outlined text-[24px]">graphic_eq</span>
+          </div>
+          <div>
+            <h3 class="font-headline-sm font-bold text-on-surface text-[17px] sm:text-[18px]">اکولایزر صوتی پیشرفته داپس</h3>
+            <p class="text-[12px] text-outline mt-0.5">تنظیم فرکانس‌ها و وضوح صدای پادکست مطابق سلیقه شنیداری شما</p>
+          </div>
+        </div>
+        <button type="button" class="btn-icon" data-modal-close aria-label="بستن">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <!-- Equalizer Body -->
+      <div class="dops-modal-body custom-scrollbar space-y-6">
+        <!-- Presets Selector -->
+        <div>
+          <label class="block text-[12px] font-semibold text-outline mb-2">حالت‌های پیش‌فرض صوتی</label>
+          <div class="grid grid-cols-3 sm:grid-cols-5 gap-2 text-[12px]" id="eq-presets">
+            <button type="button" class="eq-preset-btn active p-2 rounded-xl bg-surface-container-high text-primary-container font-bold text-center border border-primary-container/40 transition-colors" data-preset="balanced">متوازن</button>
+            <button type="button" class="eq-preset-btn p-2 rounded-xl bg-surface-container text-outline hover:text-on-surface text-center border border-transparent transition-colors" data-preset="vocal">وضوح گفتار</button>
+            <button type="button" class="eq-preset-btn p-2 rounded-xl bg-surface-container text-outline hover:text-on-surface text-center border border-transparent transition-colors" data-preset="bass">باس عمیق</button>
+            <button type="button" class="eq-preset-btn p-2 rounded-xl bg-surface-container text-outline hover:text-on-surface text-center border border-transparent transition-colors" data-preset="hifi">استودیو Hi-Fi</button>
+            <button type="button" class="eq-preset-btn p-2 rounded-xl bg-surface-container text-outline hover:text-on-surface text-center border border-transparent transition-colors" data-preset="night">شنیدن شبانه</button>
+          </div>
+        </div>
+
+        <!-- 5-Band Sliders Display -->
+        <div class="p-6 rounded-2xl bg-surface-container-low border border-outline-variant">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-[12px] font-semibold text-on-surface">طیف فرکانسی (۵ کانال دسی‌بل)</span>
+            <span class="text-[11px] font-mono text-primary font-bold">PRO DSP V2.4</span>
+          </div>
+
+          <div class="grid grid-cols-5 gap-3 sm:gap-6 items-end justify-items-center h-44 pb-2">
+            <!-- 60 Hz -->
+            <div class="flex flex-col items-center gap-2 h-full justify-end">
+              <span class="text-[10px] font-mono text-primary font-bold" id="eq-val-60">+2dB</span>
+              <input type="range" id="eq-slider-60" min="-12" max="12" value="2" class="eq-slider" orient="vertical" oninput="document.getElementById('eq-val-60').textContent=(this.value>0?'+':'')+this.value+'dB'"/>
+              <span class="text-[11px] font-mono text-outline">60Hz</span>
+            </div>
+            <!-- 230 Hz -->
+            <div class="flex flex-col items-center gap-2 h-full justify-end">
+              <span class="text-[10px] font-mono text-primary font-bold" id="eq-val-230">+1dB</span>
+              <input type="range" id="eq-slider-230" min="-12" max="12" value="1" class="eq-slider" orient="vertical" oninput="document.getElementById('eq-val-230').textContent=(this.value>0?'+':'')+this.value+'dB'"/>
+              <span class="text-[11px] font-mono text-outline">230Hz</span>
+            </div>
+            <!-- 910 Hz -->
+            <div class="flex flex-col items-center gap-2 h-full justify-end">
+              <span class="text-[10px] font-mono text-primary font-bold" id="eq-val-910">0dB</span>
+              <input type="range" id="eq-slider-910" min="-12" max="12" value="0" class="eq-slider" orient="vertical" oninput="document.getElementById('eq-val-910').textContent=(this.value>0?'+':'')+this.value+'dB'"/>
+              <span class="text-[11px] font-mono text-outline">910Hz</span>
+            </div>
+            <!-- 4 kHz -->
+            <div class="flex flex-col items-center gap-2 h-full justify-end">
+              <span class="text-[10px] font-mono text-primary font-bold" id="eq-val-4k">+3dB</span>
+              <input type="range" id="eq-slider-4k" min="-12" max="12" value="3" class="eq-slider" orient="vertical" oninput="document.getElementById('eq-val-4k').textContent=(this.value>0?'+':'')+this.value+'dB'"/>
+              <span class="text-[11px] font-mono text-outline">4kHz</span>
+            </div>
+            <!-- 14 kHz -->
+            <div class="flex flex-col items-center gap-2 h-full justify-end">
+              <span class="text-[10px] font-mono text-primary font-bold" id="eq-val-14k">+2dB</span>
+              <input type="range" id="eq-slider-14k" min="-12" max="12" value="2" class="eq-slider" orient="vertical" oninput="document.getElementById('eq-val-14k').textContent=(this.value>0?'+':'')+this.value+'dB'"/>
+              <span class="text-[11px] font-mono text-outline">14kHz</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- DSP Toggles -->
+        <div class="space-y-3">
+          <label class="flex items-center justify-between p-3 rounded-xl bg-surface-container border border-outline-variant cursor-pointer">
+            <div class="flex items-center gap-2.5">
+              <span class="material-symbols-outlined text-primary text-[20px]">record_voice_over</span>
+              <div>
+                <span class="text-[13px] font-bold text-on-surface block">تقویت شفافیت گفتار راوی (Vocal Boost)</span>
+                <span class="text-[11px] text-outline">تفکیک صدای انسان از موسیقی پس‌زمینه</span>
+              </div>
+            </div>
+            <input type="checkbox" checked class="accent-primary w-4 h-4 cursor-pointer" />
+          </label>
+
+          <label class="flex items-center justify-between p-3 rounded-xl bg-surface-container border border-outline-variant cursor-pointer">
+            <div class="flex items-center gap-2.5">
+              <span class="material-symbols-outlined text-secondary text-[20px]">volume_up</span>
+              <div>
+                <span class="text-[13px] font-bold text-on-surface block">توازن بلندی صدا (Volume Normalizer)</span>
+                <span class="text-[11px] text-outline">یکسان‌سازی نوسانات ولوم بین اپیزودهای مختلف</span>
+              </div>
+            </div>
+            <input type="checkbox" checked class="accent-primary w-4 h-4 cursor-pointer" />
+          </label>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="dops-modal-footer">
+        <button type="button" class="btn-secondary text-[13px] py-2 px-4" data-modal-close>بستن</button>
+        <button type="button" class="btn-primary text-[13px] py-2 px-5 shadow-glow" onclick="window.dopsToast('تنظیمات اکولایزر با موفقیت اعمال گردید', 'success'); document.getElementById('equalizer-modal').classList.remove('open'); document.body.style.overflow='';">
+          ذخیره و اعمال تنظیمات
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL: ACCOUNT SETTINGS
+       ======================================================================== -->
+  <div id="account-settings-modal" class="dops-modal-backdrop">
+    <div class="dops-modal-content dops-modal-md">
+      <!-- Modal Header -->
+      <div class="dops-modal-header">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-primary-container/10 flex items-center justify-center text-primary-container shrink-0">
+            <span class="material-symbols-outlined text-[24px]">settings</span>
+          </div>
+          <div>
+            <h3 class="font-headline-sm font-bold text-on-surface text-[17px] sm:text-[18px]">تنظیمات حساب کاربری</h3>
+            <p class="text-[12px] text-outline mt-0.5">مدیریت اطلاعات هویتی و اولویت‌های حساب کاربری</p>
+          </div>
+        </div>
+        <button type="button" class="btn-icon" data-modal-close aria-label="بستن">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <!-- Account Settings Form -->
+      <form class="flex flex-col flex-1 min-h-0 overflow-hidden" onsubmit="handleAccountSettingsSave(event)">
+        
+        <div class="dops-modal-body custom-scrollbar space-y-4 text-right">
+          <!-- Avatar Section -->
+          <div class="flex items-center gap-4 p-4 rounded-2xl bg-surface-container-low border border-outline-variant">
+            <div class="relative w-14 h-14 rounded-full overflow-hidden ring-2 ring-primary-container shrink-0">
+              <img src="assets/images/avatars/avatar-alex.png" alt="محمد نعمت" class="w-full h-full object-cover" />
+            </div>
+            <div>
+              <div class="text-[14px] font-bold text-on-surface">محمد نعمت</div>
+              <div class="text-[11px] text-outline mt-0.5">شنونده سطح ویژه (VIP Pro)</div>
+              <button type="button" class="mt-2 text-[12px] text-primary font-semibold hover:underline" onclick="window.dopsToast('انتخاب تصویر نمایه جدید')">تغییر تصویر نمایه</button>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[13px] font-semibold text-on-surface mb-1.5">نام و نام خانوادگی</label>
+            <input type="text" class="dops-input" value="محمد نعمت" required />
+          </div>
+
+          <div>
+            <label class="block text-[13px] font-semibold text-on-surface mb-1.5">شماره تلفن همراه (ورود پیامکی)</label>
+            <div class="dops-phone-group">
+              <div class="dops-phone-prefix">
+                <svg class="w-4 h-3 rounded-xs shrink-0" viewBox="0 0 640 480"><path fill="#239f40" d="M0 0h640v160H0z"/><path fill="#fff" d="M0 160h640v160H0z"/><path fill="#da0000" d="M0 320h640v160H0z"/></svg>
+                <span>+۹۸</span>
+              </div>
+              <input type="tel" class="dops-phone-input" value="۰۹۱۲۳۴۵۶۷۸۹" maxlength="11" />
+            </div>
+            <span class="text-[11px] text-outline mt-1 block">شماره فعال جهت دریافت کد ورود پیامکی (OTP)</span>
+          </div>
+
+          <div>
+            <label class="block text-[13px] font-semibold text-on-surface mb-1.5">آدرس ایمیل</label>
+            <input type="email" class="dops-input text-left font-mono text-[13px]" value="mohammad.nemat@example.com" dir="ltr" required />
+          </div>
+
+          <div>
+            <label class="block text-[13px] font-semibold text-on-surface mb-1.5">نام کاربری (هندل)</label>
+            <input type="text" class="dops-input text-left font-mono text-[13px]" value="@mohammad_nemat" dir="ltr" />
+          </div>
+
+          <!-- Password Settings Card (تعریف و تغییر گذرواژه جهت ورود با رمز عبور) -->
+          <div class="p-4 rounded-2xl bg-surface-container-low border border-outline-variant space-y-3.5">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-[20px]">lock_reset</span>
+                <span class="text-[13px] font-bold text-on-surface">تعریف یا تغییر رمز عبور</span>
+              </div>
+              <span class="text-[10px] px-2 py-0.5 rounded-full bg-primary-container/10 text-primary-container font-semibold">ورود با رمز عبور</span>
+            </div>
+
+            <p class="text-[11.5px] text-outline leading-relaxed">
+              با تعیین رمز عبور می‌توانید در صفحه ورود علاوه بر پیامک، با ایمیل یا شماره موبایل و این رمز عبور وارد حساب خود شوید.
+            </p>
+
+            <div class="space-y-3 pt-1">
+              <!-- Current Password -->
+              <div>
+                <label class="block text-[12px] font-semibold text-on-surface mb-1">رمز عبور فعلی</label>
+                <div class="relative flex items-center">
+                  <input type="password" id="current-password-input" class="dops-input pl-10 text-[13px]" placeholder="در صورت ثبت‌نام با پیامک خالی بگذارید" />
+                  <button type="button" class="absolute left-2.5 text-outline hover:text-on-surface transition-colors p-1" onclick="togglePasswordVisibility('current-password-input', this)" aria-label="نمایش یا پنهان‌سازی رمز">
+                    <span class="material-symbols-outlined text-[18px]">visibility</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- New Password -->
+              <div>
+                <label class="block text-[12px] font-semibold text-on-surface mb-1">رمز عبور جدید *</label>
+                <div class="relative flex items-center">
+                  <input type="password" id="new-password-input" class="dops-input pl-10 text-[13px]" placeholder="حداقل ۸ کاراکتر ترکیبی" />
+                  <button type="button" class="absolute left-2.5 text-outline hover:text-on-surface transition-colors p-1" onclick="togglePasswordVisibility('new-password-input', this)" aria-label="نمایش یا پنهان‌سازی رمز">
+                    <span class="material-symbols-outlined text-[18px]">visibility</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Confirm New Password -->
+              <div>
+                <label class="block text-[12px] font-semibold text-on-surface mb-1">تکرار رمز عبور جدید *</label>
+                <div class="relative flex items-center">
+                  <input type="password" id="confirm-password-input" class="dops-input pl-10 text-[13px]" placeholder="تکرار رمز عبور جدید" />
+                  <button type="button" class="absolute left-2.5 text-outline hover:text-on-surface transition-colors p-1" onclick="togglePasswordVisibility('confirm-password-input', this)" aria-label="نمایش یا پنهان‌سازی رمز">
+                    <span class="material-symbols-outlined text-[18px]">visibility</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Security Helper -->
+              <div class="flex items-center gap-1.5 pt-0.5 text-[11px] text-outline">
+                <span class="material-symbols-outlined text-[15px] text-primary">verified_user</span>
+                <span>پیشنهاد امنیت: حداقل ۸ نویسه ترکیبی شامل حروف، اعداد و علامت‌ها</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Notification Toggles -->
+          <div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant space-y-3">
+            <span class="text-[12px] font-bold text-on-surface block mb-2">اعلانات و پیام‌ها</span>
+            <label class="flex items-center justify-between text-[12px] cursor-pointer">
+              <span class="text-on-surface">اعلان انتشار اپیزودهای جدید کانال‌های دنبال‌شده</span>
+              <input type="checkbox" checked class="accent-primary w-4 h-4" />
+            </label>
+            <label class="flex items-center justify-between text-[12px] cursor-pointer">
+              <span class="text-on-surface">پیشنهادات هوشمند صوتی بر اساس سلایق من</span>
+              <input type="checkbox" checked class="accent-primary w-4 h-4" />
+            </label>
+          </div>
+        </div>
+
+        <!-- Modal Footer Actions -->
+        <div class="dops-modal-footer">
+          <button type="button" class="btn-secondary text-[13px] py-2 px-4" data-modal-close>انصراف</button>
+          <button type="submit" class="btn-primary text-[13px] py-2 px-5 shadow-glow">ذخیره تغییرات</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+    <aside id="dops-bottom-player" class="dops-audio-player" aria-label="پخش‌کننده صوتی سراسری داپس">
+    <!-- Clickable Waveform Progress Bar (Top border of dock) -->
+    <div id="dops-player-progress-bar" class="player-progress-bar" title="کلیک برای جابجایی زمان">
+      <div id="dops-player-progress-fill" class="player-progress-fill">
+        <div id="dops-player-progress-thumb" class="player-progress-thumb"></div>
+      </div>
+    </div>
+
+    <!-- DESKTOP PLAYER ROW (Vertically Centered, Single Row Alignment >= 640px) -->
+    <div class="player-desktop-row container-dops px-4 sm:px-6 gap-3 lg:gap-6">
+      
+      <!-- Right Column: Track Metadata & Favorite -->
+      <div class="flex items-center gap-3 min-w-0 w-1/4 max-w-[280px] shrink-0">
+        <div class="relative w-12 h-12 rounded-xl overflow-hidden bg-surface-container-high shrink-0 ring-1 ring-primary-container/30">
+          <img id="dops-player-artwork" src="assets/images/podcasts/donye-farda.png" alt="کاور اپیزود در حال پخش" class="w-full h-full object-cover"/>
+        </div>
+        <div class="flex flex-col min-w-0 justify-center">
+          <span id="dops-player-title" class="text-[13.5px] font-bold text-on-surface truncate leading-snug">
+            آینده هوش مصنوعی و مدل‌های استدلال‌گر
+          </span>
+          <span id="dops-player-podcast" class="text-[11.5px] text-on-surface-variant truncate leading-snug mt-0.5">
+            پادکست دنیای فردا • اپیزود ۸۴
+          </span>
+        </div>
+        <button type="button" id="dops-player-like-btn" class="btn-icon shrink-0" aria-label="پسندیدن">
+          <span class="material-symbols-outlined text-[20px]">favorite</span>
+        </button>
+      </div>
+
+      <!-- Center Column: Transportation Controls & Timestamps (Single Horizontally Centered Row) -->
+      <div class="flex items-center justify-center gap-2.5 md:gap-4 flex-1 max-w-xl mx-auto">
+        <!-- Shuffle -->
+        <button type="button" class="btn-icon shrink-0 text-outline hover:text-on-surface" onclick="window.dopsToast('حالت پخش تصادفی فعال شد')" aria-label="پخش تصادفی">
+          <span class="material-symbols-outlined text-[19px]">shuffle</span>
+        </button>
+        
+        <!-- 15s Rewind -->
+        <button type="button" class="btn-icon shrink-0 text-on-surface hover:text-primary-container" data-player-rewind aria-label="۱۵ ثانیه به عقب">
+          <span class="material-symbols-outlined text-[22px]">replay_10</span>
+        </button>
+
+        <!-- Master Play/Pause Trigger (Centered at 40px vertical axis) -->
+        <button type="button" class="play-circle-btn dops-player-play-btn shrink-0 w-11 h-11" aria-label="پخش یا مکث">
+          <span class="material-symbols-outlined text-[26px]">play_arrow</span>
+        </button>
+
+        <!-- 30s Forward -->
+        <button type="button" class="btn-icon shrink-0 text-on-surface hover:text-primary-container" data-player-forward aria-label="۳۰ ثانیه به جلو">
+          <span class="material-symbols-outlined text-[22px]">forward_30</span>
+        </button>
+
+        <!-- Repeat -->
+        <button type="button" class="btn-icon shrink-0 text-outline hover:text-on-surface" onclick="window.dopsToast('حالت تکرار اپیزود فعال شد')" aria-label="تکرار اپیزود">
+          <span class="material-symbols-outlined text-[19px]">repeat</span>
+        </button>
+
+        <!-- Timestamps Pill (Inline with controls) -->
+        <div class="player-time-badge flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high/60 text-[11px] font-mono text-outline shrink-0 mr-1">
+          <span id="dops-player-current-time">۰۰:۰۰</span>
+          <span class="text-outline/40">/</span>
+          <span id="dops-player-duration">۴۲:۱۵</span>
+        </div>
+      </div>
+
+      <!-- Left Column: Equalizer, Speed, Volume, Queue, Expand -->
+      <div class="flex items-center justify-end gap-1.5 md:gap-2.5 shrink-0 w-1/4 max-w-[300px]">
+        <!-- Audio Equalizer Trigger -->
+        <button type="button" class="btn-icon shrink-0" data-modal-open="equalizer-modal" title="اکولایزر صوتی داپس" aria-label="اکولایزر صوتی">
+          <span class="material-symbols-outlined text-[20px] text-primary">graphic_eq</span>
+        </button>
+
+        <!-- Playback Speed -->
+        <button type="button" id="dops-player-speed-btn" class="px-2.5 py-1 rounded-full bg-surface-container-high text-primary font-bold text-[12px] hover:bg-surface-container-highest transition-colors shrink-0" title="تغییر سرعت پخش">
+          ۱.۰x
+        </button>
+
+        <!-- Volume Slider Group -->
+        <div class="flex items-center gap-1.5 shrink-0">
+          <span id="dops-player-volume-icon" class="material-symbols-outlined text-outline hover:text-primary text-[20px] cursor-pointer" title="قطع / وصل صدا">volume_up</span>
+          <input type="range" id="dops-player-volume-slider" class="dops-slider w-16 lg:w-20" min="0" max="1" step="0.05" value="0.85" aria-label="تنظیم بلندی صدا"/>
+        </div>
+
+        <!-- Queue Trigger -->
+        <button type="button" class="btn-icon shrink-0" onclick="window.dopsToast('صف پخش پادکست آماده است')" aria-label="صف پخش">
+          <span class="material-symbols-outlined text-[20px]">queue_music</span>
+        </button>
+
+        <!-- Full Detail Page Link -->
+        <a href="episode.html" class="btn-icon shrink-0" aria-label="مشاهده صفحه اپیزود">
+          <span class="material-symbols-outlined text-[20px]">open_in_full</span>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- MOBILE COMPACT PLAYER DOCK (< 640px) -->
+    <div class="player-mobile-compact px-3 gap-2">
+      <!-- Clickable Info: Tap to Expand Bottom Sheet -->
+      <div class="compact-player-trigger flex items-center gap-2.5 min-w-0 flex-1 cursor-pointer">
+        <div class="relative w-11 h-11 rounded-lg overflow-hidden bg-surface-container-high shrink-0 ring-1 ring-primary-container/30">
+          <img src="assets/images/podcasts/donye-farda.png" alt="کاور اپیزود" class="w-full h-full object-cover"/>
+        </div>
+        <div class="flex flex-col min-w-0 justify-center">
+          <span class="text-[12.5px] font-bold text-on-surface truncate leading-tight">
+            آینده هوش مصنوعی و مدل‌های استدلال‌گر
+          </span>
+          <span class="text-[11px] text-on-surface-variant truncate leading-tight mt-0.5">
+            پادکست دنیای فردا
+          </span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-1.5 shrink-0">
+        <!-- Master Play/Pause Trigger -->
+        <button type="button" class="play-circle-btn dops-player-play-btn shrink-0 w-10 h-10" aria-label="پخش یا مکث">
+          <span class="material-symbols-outlined text-[22px]">play_arrow</span>
+        </button>
+
+        <!-- Expand to Full Player Sheet -->
+        <button type="button" class="btn-icon w-9 h-9 text-on-surface hover:text-primary shrink-0" data-player-expand aria-label="نمایش پلیر کامل">
+          <span class="material-symbols-outlined text-[24px]">expand_less</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ========================================================================
+       6. MOBILE FULL-FEATURED AUDIO PLAYER BOTTOM SHEET
+       ======================================================================== -->
+  <div id="dops-mobile-sheet-backdrop" class="fixed inset-0 z-[60] bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 sm:hidden"></div>
+
+  <aside id="dops-mobile-expanded-player" class="fixed inset-x-0 bottom-0 z-[61] max-h-[92vh] h-auto flex flex-col bg-surface border-t border-outline-variant/30 rounded-t-3xl shadow-2xl transition-transform duration-300 ease-out translate-y-full sm:hidden overflow-y-auto" role="dialog" aria-modal="true" aria-label="پخش‌کننده کامل پادکست داپس">
+    <!-- Handle Bar -->
+    <div class="w-full flex justify-center pt-3 pb-1 cursor-pointer" id="dops-sheet-handle">
+      <span class="w-12 h-1.5 rounded-full bg-outline-variant/60 block"></span>
+    </div>
+
+    <!-- Top Bar -->
+    <div class="flex items-center justify-between px-5 py-2 border-b border-outline-variant/20 shrink-0">
+      <button type="button" id="dops-expanded-close-btn" class="btn-icon w-10 h-10 rounded-full flex items-center justify-center text-on-surface hover:text-primary" aria-label="بستن پلیر">
+        <span class="material-symbols-outlined text-[24px]">expand_more</span>
+      </button>
+      <div class="text-center">
+        <span class="text-[11px] text-outline font-medium block">در حال پخش</span>
+        <span class="text-[13px] font-bold text-primary truncate max-w-[180px] block" id="dops-expanded-header-podcast">پادکست دنیای فردا</span>
+      </div>
+      <button type="button" id="dops-expanded-like-btn" class="btn-icon w-10 h-10 rounded-full flex items-center justify-center text-on-surface hover:text-red-500" aria-label="افزودن به علاقه‌مندی‌ها">
+        <span class="material-symbols-outlined text-[22px]">favorite</span>
+      </button>
+    </div>
+
+    <!-- Body -->
+    <div class="flex-1 px-6 py-4 flex flex-col items-center justify-center">
+      <!-- Large Artwork -->
+      <div class="relative w-48 h-48 xs:w-56 xs:h-56 rounded-2xl overflow-hidden shadow-2xl ring-1 ring-primary/30 mx-auto my-2 shrink-0 bg-surface-container-high">
+        <img id="dops-expanded-artwork" src="assets/images/podcasts/donye-farda.png" alt="کاور اپیزود" class="w-full h-full object-cover"/>
+        <!-- Equalizer Overlay Animation on Playing -->
+        <div class="absolute bottom-3 left-3 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md flex items-center gap-1 eq-visualizer eq-playing">
+          <span class="eq-bar"></span>
+          <span class="eq-bar"></span>
+          <span class="eq-bar"></span>
+          <span class="eq-bar"></span>
+        </div>
+      </div>
+
+      <!-- Metadata -->
+      <div class="text-center mt-3 mb-2 w-full px-2">
+        <h3 id="dops-expanded-title" class="text-[16px] xs:text-[17px] font-bold text-on-surface leading-snug line-clamp-2">
+          آینده هوش مصنوعی و مدل‌های استدلال‌گر
+        </h3>
+        <p id="dops-expanded-podcast" class="text-[12px] xs:text-[13px] text-primary font-semibold mt-1 truncate">
+          پادکست دنیای فردا • اپیزود ۸۴
+        </p>
+      </div>
+
+      <!-- Scrubber -->
+      <div class="w-full mt-3 mb-1">
+        <div id="dops-expanded-progress-bar" class="relative h-2.5 bg-surface-container-highest rounded-full cursor-pointer overflow-hidden" title="جابجایی زمان پخش">
+          <div id="dops-expanded-progress-fill" class="h-full bg-gradient-to-r from-secondary to-primary rounded-full transition-all" style="width: 0%;"></div>
+        </div>
+        <div class="flex items-center justify-between text-[11px] font-mono text-outline mt-1.5 px-0.5">
+          <span id="dops-expanded-current-time">۰۰:۰۰</span>
+          <span id="dops-expanded-duration">۴۲:۱۵</span>
+        </div>
+      </div>
+
+      <!-- Primary Transport Controls (Large Touch Targets >= 44px) -->
+      <div class="flex items-center justify-between w-full max-w-xs mt-3 mb-2">
+        <!-- Shuffle -->
+        <button type="button" class="btn-icon w-11 h-11 text-outline hover:text-primary shrink-0" onclick="window.dopsToast('حالت پخش تصادفی فعال شد')" aria-label="پخش تصادفی">
+          <span class="material-symbols-outlined text-[20px]">shuffle</span>
+        </button>
+
+        <!-- Rewind 15s -->
+        <button type="button" class="btn-icon w-11 h-11 text-on-surface hover:text-primary shrink-0" data-player-rewind aria-label="۱۵ ثانیه به عقب">
+          <span class="material-symbols-outlined text-[24px]">replay_10</span>
+        </button>
+
+        <!-- Giant Master Play/Pause Button -->
+        <button type="button" class="play-circle-btn dops-player-play-btn w-16 h-16 rounded-full shrink-0 shadow-lg shadow-primary/30" aria-label="پخش یا مکث">
+          <span class="material-symbols-outlined text-[34px]">play_arrow</span>
+        </button>
+
+        <!-- Forward 30s -->
+        <button type="button" class="btn-icon w-11 h-11 text-on-surface hover:text-primary shrink-0" data-player-forward aria-label="۳۰ ثانیه به جلو">
+          <span class="material-symbols-outlined text-[24px]">forward_30</span>
+        </button>
+
+        <!-- Repeat -->
+        <button type="button" class="btn-icon w-11 h-11 text-outline hover:text-primary shrink-0" onclick="window.dopsToast('حالت تکرار اپیزود فعال شد')" aria-label="تکرار اپیزود">
+          <span class="material-symbols-outlined text-[20px]">repeat</span>
+        </button>
+      </div>
+
+      <!-- Secondary Controls: Speed, Volume, Equalizer, Queue -->
+      <div class="w-full max-w-sm pt-3 pb-2 border-t border-outline-variant/30 flex items-center justify-between gap-2 mt-2">
+        <!-- Playback Speed -->
+        <button type="button" id="dops-expanded-speed-btn" class="px-3 py-1.5 rounded-full bg-surface-container-high text-primary font-bold text-[12px] hover:bg-surface-container-highest transition-colors shrink-0" title="تغییر سرعت پخش">
+          ۱.۰x
+        </button>
+
+        <!-- Volume Row -->
+        <div class="flex items-center gap-2 flex-1 max-w-[140px]">
+          <span id="dops-expanded-volume-icon" class="material-symbols-outlined text-outline hover:text-primary text-[20px] cursor-pointer shrink-0" title="قطع / وصل صدا">volume_up</span>
+          <input type="range" id="dops-expanded-volume-slider" class="dops-slider w-full" min="0" max="1" step="0.05" value="0.85" aria-label="تنظیم بلندی صدا"/>
+        </div>
+
+        <div class="flex items-center gap-1 shrink-0">
+          <!-- Audio Equalizer -->
+          <button type="button" class="btn-icon w-10 h-10 text-primary hover:bg-surface-container-high" data-modal-open="equalizer-modal" title="اکولایزر صوتی">
+            <span class="material-symbols-outlined text-[22px]">graphic_eq</span>
+          </button>
+          <!-- Queue -->
+          <button type="button" class="btn-icon w-10 h-10 text-outline hover:text-on-surface" onclick="window.dopsToast('صف پخش پادکست آماده است')" title="صف پخش">
+            <span class="material-symbols-outlined text-[22px]">queue_music</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </aside>
+
+  <script src="assets/js/dops-ui.js"></script>
+  <script src="assets/js/dops-player.js"></script>
+</body>
+</html>
